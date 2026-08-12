@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internships & Workshops | Srimathi Natarajan</title>
+    <meta name="description"
+        content="Detailed overview of Srimathi Natarajan's internships and professional workshops.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Srimathi Natarajan</h2>
+                <p>Business / Data Analyst</p>
+                <div class="logo-container">
+                    <img src="uconn_business_logo.png" alt="Uconn Business Logo" class="uconn-logo">
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html#hero" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#skills" class="nav-link">Skills</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="certifications.html" class="nav-link">Technical Certifications</a>
+                <a href="intern-workshop.html" class="nav-link active">Intern/Workshop</a>
+                <a href="travelers-case-study.html" class="nav-link">Competition</a>
+                <a href="Srimathi_Natarajan_Resume.pdf" target="_blank" class="nav-link"
+                    download="Srimathi_Natarajan_Resume">Resume / CV</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="social-links">
+                    <button class="social-btn" data-url="https://www.linkedin.com/in/srimathi-natarajan-424b54169">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </button>
+                    <button class="social-btn"
+                        data-url="https://mail.google.com/mail/?view=cm&fs=1&to=srimathi.natarajan23@gmail.com">
+                        <svg class="gmail-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M24 4.5v15c0 .85-.65 1.5-1.5 1.5H21V7.39l-9 6.58-9-6.58V21H1.5C.65 21 0 20.35 0 19.5v-15c0-1.17 1.32-1.88 2.26-1.19L12 10.61l9.74-7.3c.94-.69 2.26 0 2.26 1.19z" />
+                        </svg>
+                    </button>
+                    <button class="social-btn" data-url="tel:8607077606">
+                        <i class="fa-solid fa-phone"></i>
+                    </button>
+                </div>
+                <p>&copy; 2025</p>
+            </div>
+        </aside>
+
+        <!-- Mobile Header Toggle -->
+        <div class="mobile-toggle-bar">
+            <div class="brand">Srimathi</div>
+            <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="section">
+                <div class="container overflow-hidden">
+                    <header class="page-header">
+                        <a href="index.html" class="back-link">
+                            <i class="fa-solid fa-arrow-left"></i> Back to Portfolio
+                        </a>
+                        <h1 class="section-title">Internships & Workshops</h1>
+                        <p class="section-subtitle">A professional record of my industry training and specialized skill
+                            development.</p>
+                    </header>
+
+
+
+                    <!-- Case Competition Section -->
+                    <div class="experience-group">
+                        <h2 class="group-title">Case Competition</h2>
+
+                        <div class="workshop-grid">
+                            <div class="workshop-card internship-card" onclick="window.location.href='travelers-case-study.html'" style="cursor: pointer;">
+                                <i class="fa-solid fa-trophy" style="color: #f57c00;"></i>
+                                <h3>Travelers BI&amp;A LDP Case Competition</h3>
+                                <p class="organization">Travelers &times; UConn School of Business</p>
+                                <p class="period">2026 &middot; Team 1</p>
+                                <p class="description">Commercial auto policy churn prediction using machine learning (Gradient Boosting, 0.906 AUC, 94.4% accuracy).</p>
+                                <p style="font-size: 0.8rem; margin-top: 1rem; color: #f57c00; font-weight: 600;">
+                                    View Full Case Study <i class="fa-solid fa-arrow-right-long"></i></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Internship Section -->
+                    <div class="experience-group">
+                        <h2 class="group-title">Internship</h2>
+
+                        <div class="workshop-grid">
+                            <div class="workshop-card internship-card">
+                                <i class="fa-solid fa-network-wired"></i>
+                                <h3>Dynamic Routing Protocols Analysis</h3>
+                                <p class="organization">BSNL</p>
+                                <p class="period">Jan 2020 - Mar 2020</p>
+                                <p class="description">Analyzed and compared dynamic routing protocols (OSPF, EIGRP,
+                                    IS-IS) in IPv4 & IPv6 networks, evaluating performance metrics including packet
+                                    loss, convergence time, throughput, and latency to optimize network efficiency.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Workshop Section -->
+                    <div class="experience-group">
+                        <h2 class="group-title">Professional Workshops</h2>
+                        <div class="workshop-grid">
+                            <div class="workshop-card" id="ml-workshop-card" style="cursor: pointer;">
+                                <i class="fa-solid fa-robot"></i>
+                                <h3>Machine Learning Workshop</h3>
+                                <p class="organization">Lema Labs, IIT CHENNAI</p>
+                                <p class="description">Gained an understanding of fundamental ML concepts, data
+                                    preprocessing, and algorithms (supervised/unsupervised). Explored deep learning and
+                                    deployment considerations.</p>
+                                <p
+                                    style="font-size: 0.8rem; margin-top: 1rem; color: var(--text-black); font-weight: 600;">
+                                    Click to view certificate <i class="fa-solid fa-arrow-right-long"></i></p>
+                            </div>
+
+                            <div class="workshop-card" id="underwater-robotics-card" style="cursor: pointer;">
+                                <i class="fa-solid fa-ship"></i>
+                                <h3>Underwater Robotics</h3>
+                                <p class="organization">Kurukshetra, Anna University, Chennai</p>
+                                <p class="description">Hands-on experience in designing, building, and operating robots
+                                    for underwater use. Explored electronics, hydrodynamics, and sensor technologies
+                                    through practical robot assembly and testing.</p>
+                                <p
+                                    style="font-size: 0.8rem; margin-top: 1rem; color: var(--text-black); font-weight: 600;">
+                                    Click to view certificate <i class="fa-solid fa-arrow-right-long"></i></p>
+                            </div>
+
+                            <div class="workshop-card" id="android-workshop-card" style="cursor: pointer;">
+                                <i class="fa-brands fa-android"></i>
+                                <h3>Android Workshop</h3>
+                                <p class="organization">Codebind Technologies, Chennai</p>
+                                <p class="description">Hands-on learning of the Android development environment, UI
+                                    design, activity lifecycle, and networking. Gained insights into app data
+                                    management, debugging, and publishing procedures.</p>
+                                <p
+                                    style="font-size: 0.8rem; margin-top: 1rem; color: var(--text-black); font-weight: 600;">
+                                    Click to view certificate <i class="fa-solid fa-arrow-right-long"></i></p>
+                            </div>
+
+                            <div class="workshop-card" id="embedded-workshop-card" style="cursor: pointer;">
+                                <i class="fa-solid fa-microchip"></i>
+                                <h3>Embedded Systems - IPT</h3>
+                                <p class="organization">Codebind Technologies, Chennai</p>
+                                <p class="description">Learnt the essentials of embedded systems development using
+                                    Arduino microcontrollers. Interfaced sensors and actuators to build functional
+                                    projects through hands-on practical demonstrations.</p>
+                                <p
+                                    style="font-size: 0.8rem; margin-top: 1rem; color: var(--text-black); font-weight: 600;">
+                                    Click to view certificate <i class="fa-solid fa-arrow-right-long"></i></p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Certification Modal -->
+    <div id="cert-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="section-title">Cloud Certifications</h2>
+            <div class="cert-container">
+                <div class="cert-item">
+                    <img src="aws_certification.png" alt="AWS Certified Cloud Practitioner" class="cert-image">
+                </div>
+                <div class="cert-item">
+                    <img src="gcp_certification.png" alt="Google Cloud Certified Associate Cloud Engineer"
+                        class="cert-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Analytics Modal -->
+    <div id="data-cert-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-data-modal">&times;</span>
+            <h2 class="section-title">Data Analytics Certification</h2>
+            <div class="cert-container">
+                <div class="cert-item">
+                    <img src="data_analytics_cert.png" alt="Data Analytics Certificate" class="cert-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SSI Programming Modal -->
+    <div id="programming-cert-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-programming-modal">&times;</span>
+            <h2 class="section-title">Programming Certifications</h2>
+            <div class="cert-container">
+                <div class="cert-item">
+                    <img src="java_certification.png" alt="Java Programming Certificate" class="cert-image">
+                </div>
+                <div class="cert-item">
+                    <img src="cpp_certification.png" alt="C/C++ Programming Certificate" class="cert-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ML Workshop Modal -->
+    <div id="ml-cert-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-ml-modal">&times;</span>
+            <h2 class="section-title">Machine Learning Certificate</h2>
+            <div class="cert-container">
+                <div class="cert-item">
+                    <img src="ml_workshop_cert.png" alt="ML Workshop Certificate" class="cert-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Underwater Robotics Modal -->
+    <div id="underwater-robotics-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-underwater-modal">&times;</span>
+            <h2 class="section-title">Underwater Robotics Certificate</h2>
+            <div class="cert-container">
+                <div class="cert-item">
+                    <img src="underwater_robotics_cert.png" alt="Underwater Robotics Certificate" class="cert-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Android Workshop Modal -->
+    <div id="android-cert-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-android-modal">&times;</span>
+            <h2 class="section-title">Android Development Certificate</h2>
+            <div class="cert-container">
+                <div class="cert-item">
+                    <img src="android_workshop_cert.png" alt="Android Workshop Certificate" class="cert-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Embedded Systems Modal -->
+    <div id="embedded-cert-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-embedded-modal">&times;</span>
+            <h2 class="section-title">Embedded Systems Certificate</h2>
+            <div class="cert-container">
+                <div class="cert-item">
+                    <img src="embedded_systems_cert.png" alt="Embedded Systems Certificate" class="cert-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

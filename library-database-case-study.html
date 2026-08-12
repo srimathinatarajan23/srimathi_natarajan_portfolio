@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Book Borrowing System | Srimathi Natarajan</title>
+    <meta name="description"
+        content="Enterprise Relational Database Architecture & Data Population case study — UConn OPIM 5272 Database Management, by Srimathi Natarajan & Team 1.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Scoped styles for this case-study page. Reuses existing colors, font, and card look. -->
+    <style>
+        .case-intro { max-width: 900px; margin-bottom: 2.5rem; }
+        .case-intro .lead { font-size: 1.15rem; color: var(--text-black); font-weight: 500; margin-bottom: 1rem; }
+        .case-intro p { color: var(--text-grey); font-size: 1rem; margin-bottom: 1rem; }
+        .case-intro .context-line { font-size: 0.85rem; color: #999; font-weight: 500; margin-top: 0.5rem; }
+
+        .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 2rem 0 3.5rem; }
+        @media (max-width: 900px) { .stat-row { grid-template-columns: repeat(2, 1fr); } }
+        .stat-tile { background: #fff; border: 1px solid var(--border-color); padding: 1.75rem 1.25rem; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+        .stat-tile .num { font-size: 2.2rem; font-weight: 700; color: #f57c00; line-height: 1; }
+        .stat-tile .lbl { font-size: 0.8rem; color: #999; margin-top: 0.6rem; letter-spacing: 0.5px; }
+
+        .case-block { margin-bottom: 3.5rem; }
+        .case-block > h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .case-block > .block-sub { color: #999; font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+        .step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        @media (max-width: 900px) { .step-grid { grid-template-columns: 1fr; } }
+        .step { background: #fff; border: 1px solid var(--border-color); padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+        .step h4 { font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; color: #f57c00; margin-bottom: 0.6rem; }
+        .step h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .step p { font-size: 0.9rem; color: var(--text-grey); margin: 0; }
+        .step ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
+        .step li { font-size: 0.88rem; color: var(--text-grey); margin-bottom: 0.3rem; }
+        .step code { background: #f5f5f5; padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.82rem; }
+
+        .model-table-wrap { overflow-x: auto; }
+        .model-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 560px; }
+        .model-table th, .model-table td { border: 1px solid var(--border-color); padding: 0.8rem 1rem; text-align: center; }
+        .model-table th { background: #f5f5f5; font-weight: 600; color: var(--text-black); }
+        .model-table td:first-child, .model-table th:first-child { text-align: left; }
+        .model-table tr.best { background: #fff8e1; }
+        .model-table tr.best td:first-child { font-weight: 700; color: #f57c00; }
+        .table-note { font-size: 0.8rem; color: #999; margin-top: 0.7rem; }
+
+        .driver-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .driver-tags span { font-size: 0.85rem; background: #fff8e1; color: #f57c00; padding: 0.45rem 0.9rem; border-radius: 4px; font-weight: 600; }
+
+        .team-credits { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+        .team-credits a { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid var(--border-color); padding: 0.6rem 1rem; border-radius: 4px; font-size: 0.9rem; font-weight: 500; color: var(--text-black); background: #fff; transition: all .3s ease; }
+        .team-credits a:hover { border-color: #f57c00; color: #f57c00; }
+    </style>
+</head>
+
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Srimathi Natarajan</h2>
+                <p>Business / Data Analyst</p>
+                <div class="logo-container">
+                    <img src="uconn_business_logo.png" alt="Uconn Business Logo" class="uconn-logo">
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html#hero" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#skills" class="nav-link">Skills</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="certifications.html" class="nav-link">Technical Certifications</a>
+                <a href="intern-workshop.html" class="nav-link">Intern/Workshop</a>
+                <a href="travelers-case-study.html" class="nav-link">Competition</a>
+                <a href="Srimathi_Natarajan_Resume.pdf" target="_blank" class="nav-link"
+                    download="Srimathi_Natarajan_Resume">Resume / CV</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="social-links">
+                    <button class="social-btn" data-url="https://www.linkedin.com/in/srimathi-natarajan-424b54169">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </button>
+                    <button class="social-btn"
+                        data-url="https://mail.google.com/mail/?view=cm&fs=1&to=srimathi.natarajan23@gmail.com">
+                        <svg class="gmail-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M24 4.5v15c0 .85-.65 1.5-1.5 1.5H21V7.39l-9 6.58-9-6.58V21H1.5C.65 21 0 20.35 0 19.5v-15c0-1.17 1.32-1.88 2.26-1.19L12 10.61l9.74-7.3c.94-.69 2.26 0 2.26 1.19z" />
+                        </svg>
+                    </button>
+                    <button class="social-btn" data-url="tel:8607077606">
+                        <i class="fa-solid fa-phone"></i>
+                    </button>
+                </div>
+                <p>&copy; <span id="year">2026</span></p>
+            </div>
+        </aside>
+
+        <!-- Mobile Header Toggle -->
+        <div class="mobile-toggle-bar">
+            <div class="brand">Srimathi</div>
+            <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="section">
+                <div class="container">
+                    <header class="page-header">
+                        <a href="projects.html" class="back-link">
+                            <i class="fa-solid fa-arrow-left"></i> Back to Projects
+                        </a>
+                        <h1 class="section-title">Library Book Borrowing System &amp; Database Architecture</h1>
+                        <p class="section-subtitle">Designing, modeling, and populating an enterprise relational database system — a database engineering case study.</p>
+                    </header>
+
+                    <!-- Intro / Reflection -->
+                    <div class="case-intro">
+                        <p class="lead">As part of OPIM 5272 (Database Management) at the University of Connecticut School of Business, Team 1 designed and implemented an end-to-end Physical Entity Relationship Model and Data Population strategy for a multi-branch Library Book Borrowing System.</p>
+                        <p>Modern library operations demand strict data integrity across member accounts, book copies, active loans, reservations, fines, and branch inventories. Our objective was to construct a robust 3NF relational database architecture with complete constraint enforcement and verified statistical data populations.</p>
+                        <p class="context-line">OPIM 5272 Project Deliverable 5 · Group 1 (Disha Hulikal, Madeleine Day, Srimathi Natarajan, Alyssa McCarthy)</p>
+                    </div>
+
+                    <!-- Headline Metrics -->
+                    <div class="stat-row">
+                        <div class="stat-tile">
+                            <div class="num">12</div>
+                            <div class="lbl">RELATIONAL ENTITIES</div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="num">100%</div>
+                            <div class="lbl">REFERENTIAL INTEGRITY</div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="num">500+</div>
+                            <div class="lbl">POPULATED SQL ROWS</div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="num">3NF</div>
+                            <div class="lbl">NORMALIZED SCHEMA</div>
+                        </div>
+                    </div>
+
+                    <!-- Overview Card -->
+                    <div class="projects-grid" style="margin-bottom: 3.5rem;">
+                        <div class="project-card-modern">
+                            <div class="project-header">
+                                <h3>Enterprise Library Database Architecture</h3>
+                                <span class="project-badge">Database Design &amp; Data Engineering</span>
+                            </div>
+                            <p class="project-date">2026 · UConn School of Business (OPIM 5272)</p>
+
+                            <div class="project-sections">
+                                <div class="project-section">
+                                    <h4>WHAT WE DID</h4>
+                                    <p>Architected a complete relational database for library branch operations. Modeled member inheritance (Adult vs. Child subtypes with total specialization and disjoint constraint), loan tracking, reservation queues, fine assessment, author bibliographies, and book copy availability across branches.</p>
+                                </div>
+
+                                <div class="project-section">
+                                    <h4>HOW WE DID IT</h4>
+                                    <p>Developed logical and physical Entity Relationship Diagrams in DBeaver. Enforced primary key/foreign key constraints, non-null requirements, and unique indexing. Populated every table with valid data records adhering to strict relational constraints.</p>
+                                </div>
+
+                                <div class="project-section">
+                                    <h4>RESULTS</h4>
+                                    <p>Delivered a fully verified database instance with 50+ records populated per entity table. Generated statistical summary reports confirming zero orphan records, accurate row counts, and optimized table storage metrics.</p>
+                                </div>
+                            </div>
+
+                            <div class="project-tools">
+                                <h4>TOOLS &amp; TECHNOLOGIES</h4>
+                                <div class="tech-tags">
+                                    <span>SQL</span>
+                                    <span>MySQL / InnoDB</span>
+                                    <span>DBeaver</span>
+                                    <span>Physical ERD</span>
+                                    <span>Data Modeling</span>
+                                    <span>Relational Integrity</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Approach -->
+                    <div class="case-block">
+                        <h2>How We Approached It</h2>
+                        <p class="block-sub">From conceptual requirement modeling to physical SQL table population and statistical verification.</p>
+
+                        <div class="step-grid">
+                            <div class="step">
+                                <h4>STEP 01 · ENTITY ARCHITECTURE &amp; SUBTYPES</h4>
+                                <h3>Member Inheritance &amp; Constraints</h3>
+                                <p>We structured member accounts into a supertype-subtype relationship:</p>
+                                <ul>
+                                    <li><strong>Supertype:</strong> <code>MEMBER</code> (holds contact info, email, join date, branch ID)</li>
+                                    <li><strong>Subtypes:</strong> <code>ADULT</code> (Government ID, Payment Type) and <code>CHILD</code> (Guardian Name, Max Books Allowed)</li>
+                                    <li><strong>Constraints:</strong> Enforced total specialization (every member MUST be an Adult or Child) and disjoint constraint (a member cannot be both).</li>
+                                </ul>
+                            </div>
+
+                            <div class="step">
+                                <h4>STEP 02 · PHYSICAL ERD DESIGN</h4>
+                                <h3>Normalizing Relationships in DBeaver</h3>
+                                <p>Modeled 1:N and M:N relationships across operational domains:</p>
+                                <ul>
+                                    <li><code>LIBRARY_BRANCH</code> &rarr; <code>STAFF</code> &amp; <code>BOOK_COPY</code></li>
+                                    <li><code>BOOK</code> &rarr; <code>AUTHOR</code>, <code>GENRE</code>, <code>SUB_GENRE</code></li>
+                                    <li><code>LOAN</code> &amp; <code>RESERVATION</code> &rarr; <code>BOOK_COPY</code> &amp; <code>MEMBER</code></li>
+                                    <li><code>FINE</code> &rarr; <code>LOAN</code> &amp; <code>MEMBER</code></li>
+                                </ul>
+                            </div>
+
+                            <div class="step">
+                                <h4>STEP 03 · DDL CREATION &amp; CONSTRAINT ENFORCEMENT</h4>
+                                <h3>Strict Schema Rules</h3>
+                                <p>Wrote DDL scripts in SQL defining precise data types (e.g. <code>DECIMAL(6,2)</code> for fines, <code>VARCHAR(100)</code> for emails, <code>DATETIME</code> for loan tracking) and foreign key CASCADE/RESTRICT rules to prevent invalid deletions.</p>
+                            </div>
+
+                            <div class="step">
+                                <h4>STEP 04 · SQL DATA POPULATION</h4>
+                                <h3>Generating Realistic Test Populations</h3>
+                                <p>Populated 50+ valid records into each table. Ensured foreign key references existed before child row inserts, maintaining 100% referential integrity across all 12 tables.</p>
+                            </div>
+
+                            <div class="step">
+                                <h4>STEP 05 · STATISTICAL AUDITING &amp; DBERVER VERIFICATION</h4>
+                                <h3>Table Statistical Summaries</h3>
+                                <p>Ran table statistics tools in DBeaver (InnoDB engine) to inspect row counts, data lengths (16K pages), index lengths, and update timestamps across all entities.</p>
+                            </div>
+
+                            <div class="step">
+                                <h4>STEP 06 · OPERATIONAL VALIDATION</h4>
+                                <h3>Query Testing</h3>
+                                <p>Verified critical business queries: identifying overdue loans, calculating outstanding member fines, looking up book copy availability per branch, and auditing active reservations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Schema & Table Summary Table -->
+                    <div class="case-block">
+                        <h2>Database Table Statistical Summaries</h2>
+                        <p class="block-sub">Summary of populated relational entity tables verified in DBeaver.</p>
+
+                        <div class="model-table-wrap">
+                            <table class="model-table">
+                                <thead>
+                                    <tr>
+                                        <th>Entity Table</th>
+                                        <th>Primary Key</th>
+                                        <th>Row Count</th>
+                                        <th>Data Length</th>
+                                        <th>Key Attributes &amp; Relationships</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="best">
+                                        <td>MEMBER</td>
+                                        <td>Member_ID</td>
+                                        <td>100</td>
+                                        <td>16 KB</td>
+                                        <td>First/Last Name, Email, Cell Phone, Member Type, Join Date</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ADULT</td>
+                                        <td>Adult_ID</td>
+                                        <td>50</td>
+                                        <td>16 KB</td>
+                                        <td>Subtype of MEMBER; Government_ID, Payment_Type</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CHILD</td>
+                                        <td>Child_ID</td>
+                                        <td>50</td>
+                                        <td>16 KB</td>
+                                        <td>Subtype of MEMBER; Guardian_Name, Max_Books_Allowed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BOOK</td>
+                                        <td>Book_ID</td>
+                                        <td>50</td>
+                                        <td>16 KB</td>
+                                        <td>Title, Publication_Year, Publisher, Language, Author_ID</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BOOK_COPY</td>
+                                        <td>Book_Copy_ID</td>
+                                        <td>50</td>
+                                        <td>16 KB</td>
+                                        <td>Book_ID, Copy_status, Copy_Volume, Shelf_Location, Branch_ID</td>
+                                    </tr>
+                                    <tr>
+                                        <td>LOAN</td>
+                                        <td>Loan_ID</td>
+                                        <td>50</td>
+                                        <td>16 KB</td>
+                                        <td>Book_Copy_ID, Member_ID, Staff_ID, Loan_Date, Due_Date, Return_Date</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FINE</td>
+                                        <td>Fine_ID</td>
+                                        <td>50</td>
+                                        <td>16 KB</td>
+                                        <td>Amount, Reason, Payment_status, Date_issued, Due_Date, Loan_ID, Member_ID</td>
+                                    </tr>
+                                    <tr>
+                                        <td>RESERVATION</td>
+                                        <td>Reservation_ID</td>
+                                        <td>50</td>
+                                        <td>16 KB</td>
+                                        <td>Book_Copy_ID, Member_ID, Staff_ID, Reservation_date, Expiration_date</td>
+                                    </tr>
+                                    <tr>
+                                        <td>AUTHOR</td>
+                                        <td>Author_ID</td>
+                                        <td>50</td>
+                                        <td>16 KB</td>
+                                        <td>First/Last Name, Biography, Nationality</td>
+                                    </tr>
+                                    <tr>
+                                        <td>GENRE</td>
+                                        <td>Genre_ID</td>
+                                        <td>50</td>
+                                        <td>16 KB</td>
+                                        <td>Genre_name, Genre_description, Date_added, Audience</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SUB_GENRE</td>
+                                        <td>Category_ID</td>
+                                        <td>50</td>
+                                        <td>16 KB</td>
+                                        <td>Category_name, Category_description, Genre_ID, Book_ID</td>
+                                    </tr>
+                                    <tr>
+                                        <td>LIBRARY_BRANCH / STAFF</td>
+                                        <td>Branch_ID / Staff_ID</td>
+                                        <td>50 / 50</td>
+                                        <td>16 KB</td>
+                                        <td>Branch Name/Address/Manager &amp; Staff Roles/Positions</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="table-note">All 12 tables populated with 50+ valid records each using DBeaver with MySQL InnoDB storage engine, ensuring complete data consistency and zero orphan foreign keys.</p>
+                    </div>
+
+                    <!-- Key Concepts -->
+                    <div class="case-block">
+                        <h2>Key Database Capabilities</h2>
+                        <p class="block-sub">Core relational engineering techniques implemented in this project.</p>
+                        <div class="driver-tags">
+                            <span>Subtype Discriminator (Member_Type)</span>
+                            <span>Total Specialization</span>
+                            <span>Disjoint Constraints</span>
+                            <span>Composite Primary Keys</span>
+                            <span>Cascade Foreign Keys</span>
+                            <span>3NF Normalization</span>
+                            <span>Associative Entities (M:N)</span>
+                            <span>Indexed Queries</span>
+                            <span>Referential Integrity</span>
+                        </div>
+                    </div>
+
+                    <!-- Team Credits -->
+                    <div class="case-block" style="margin-bottom: 1rem;">
+                        <h2>Project Team</h2>
+                        <p class="block-sub">OPIM 5272 Group 1 — UConn School of Business.</p>
+                        <div class="team-credits">
+                            <a href="#" style="pointer-events: none;"><i class="fa-solid fa-user"></i> Srimathi Natarajan</a>
+                            <a href="#" style="pointer-events: none;"><i class="fa-solid fa-user"></i> Disha Hulikal</a>
+                            <a href="#" style="pointer-events: none;"><i class="fa-solid fa-user"></i> Madeleine Day</a>
+                            <a href="#" style="pointer-events: none;"><i class="fa-solid fa-user"></i> Alyssa McCarthy</a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

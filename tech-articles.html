@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srimathi Natarajan | Tech Articles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .tech-article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .article-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--text-black);
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-black);
+        }
+
+        .article-meta {
+            font-size: 0.9rem;
+            color: var(--text-grey);
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .article-badge {
+            background: #f0f0f0;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--text-black);
+        }
+
+        .article-desc {
+            color: var(--text-grey);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Srimathi Natarajan</h2>
+                <p>Business / Data Analyst</p>
+                <div class="logo-container">
+                    <img src="uconn_business_logo.png" alt="Uconn Business Logo" class="uconn-logo">
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html#hero" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#skills" class="nav-link">Skills</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="intern-workshop.html" class="nav-link">Intern/Workshop</a>
+                <a href="travelers-case-study.html" class="nav-link">Competition</a>
+                <a href="Srimathi_Natarajan_Resume.pdf" target="_blank" class="nav-link"
+                    download="Srimathi_Natarajan_Resume">Resume / CV</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="social-links">
+                    <button class="social-btn" data-url="https://www.linkedin.com/in/srimathi-natarajan-424b54169">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </button>
+                    <button class="social-btn"
+                        data-url="https://mail.google.com/mail/?view=cm&fs=1&to=srimathi.natarajan23@gmail.com">
+                        <svg class="gmail-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M24 4.5v15c0 .85-.65 1.5-1.5 1.5H21V7.39l-9 6.58-9-6.58V21H1.5C.65 21 0 20.35 0 19.5v-15c0-1.17 1.32-1.88 2.26-1.19L12 10.61l9.74-7.3c.94-.69 2.26 0 2.26 1.19z" />
+                        </svg>
+                    </button>
+                    <button class="social-btn" data-url="tel:8607077606">
+                        <i class="fa-solid fa-phone"></i>
+                    </button>
+                </div>
+                <p>&copy; <span id="year"></span> Srimathi Natarajan</p>
+            </div>
+        </aside>
+
+        <!-- Mobile Header Toggle -->
+        <div class="mobile-toggle-bar">
+            <div class="brand">Srimathi</div>
+            <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="section">
+                <div class="container tech-article-container">
+                    <h2 class="section-title">Tech Articles</h2>
+
+                    <div class="article-card">
+                        <h3 class="article-title">Performance Analysis of Dynamic Routing Protocols (IPv4 & IPv6)</h3>
+                        <div class="article-meta">
+                            <span class="article-badge">Networking</span>
+                            <span class="article-badge">Research</span>
+                            <span>Published via IRJET</span>
+                        </div>
+
+                        <div class="article-desc">
+                            <p>This research paper presents a comprehensive analysis of dynamic routing protocols
+                                including OSPF, EIGRP, and IS-IS across both IPv4 and IPv6 network environments. The
+                                study evaluates critical performance metrics such as convergence time, packet loss,
+                                throughput, and latency to determine optimal routing strategies for modern network
+                                infrastructures.</p>
+                            <p>The findings demonstrate significant performance improvements through strategic protocol
+                                redistribution and provide actionable insights for network engineers designing
+                                resilient, high-availability networks.</p>
+                        </div>
+
+                        <a href="https://irjet.net/archives/V7/i4/IRJET-V7I4462.pdf" target="_blank"
+                            class="btn btn-primary">
+                            PUBLICATION <i class="fa-solid fa-arrow-up-right-from-square"
+                                style="margin-left: 0.5rem; font-size: 0.8em;"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelers BI&A Case Competition | Srimathi Natarajan</title>
+    <meta name="description"
+        content="Policy churn prediction case study — Travelers BI&A LDP Case Competition, presented by Srimathi Natarajan (Team 1, UConn).">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Scoped styles for this case-study page. Reuses existing colors, font, and card look. -->
+    <style>
+        .case-intro { max-width: 900px; margin-bottom: 2.5rem; }
+        .case-intro .lead { font-size: 1.15rem; color: var(--text-black); font-weight: 500; margin-bottom: 1rem; }
+        .case-intro p { color: var(--text-grey); font-size: 1rem; margin-bottom: 1rem; }
+        .case-intro .context-line { font-size: 0.85rem; color: #999; font-weight: 500; margin-top: 0.5rem; }
+
+        .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 2rem 0 3.5rem; }
+        @media (max-width: 900px) { .stat-row { grid-template-columns: repeat(2, 1fr); } }
+        .stat-tile { background: #fff; border: 1px solid var(--border-color); padding: 1.75rem 1.25rem; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+        .stat-tile .num { font-size: 2.2rem; font-weight: 700; color: #f57c00; line-height: 1; }
+        .stat-tile .lbl { font-size: 0.8rem; color: #999; margin-top: 0.6rem; letter-spacing: 0.5px; }
+
+        .case-block { margin-bottom: 3.5rem; }
+        .case-block > h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .case-block > .block-sub { color: #999; font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+        .step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        @media (max-width: 900px) { .step-grid { grid-template-columns: 1fr; } }
+        .step { background: #fff; border: 1px solid var(--border-color); padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+        .step h4 { font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; color: #f57c00; margin-bottom: 0.6rem; }
+        .step h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .step p { font-size: 0.9rem; color: var(--text-grey); margin: 0; }
+        .step ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
+        .step li { font-size: 0.88rem; color: var(--text-grey); margin-bottom: 0.3rem; }
+        .step code { background: #f5f5f5; padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.82rem; }
+
+        .model-table-wrap { overflow-x: auto; }
+        .model-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 560px; }
+        .model-table th, .model-table td { border: 1px solid var(--border-color); padding: 0.8rem 1rem; text-align: center; }
+        .model-table th { background: #f5f5f5; font-weight: 600; color: var(--text-black); }
+        .model-table td:first-child, .model-table th:first-child { text-align: left; }
+        .model-table tr.best { background: #fff8e1; }
+        .model-table tr.best td:first-child { font-weight: 700; color: #f57c00; }
+        .table-note { font-size: 0.8rem; color: #999; margin-top: 0.7rem; }
+
+        .driver-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .driver-tags span { font-size: 0.85rem; background: #fff8e1; color: #f57c00; padding: 0.45rem 0.9rem; border-radius: 4px; font-weight: 600; }
+
+        .photo-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        @media (max-width: 900px) { .photo-gallery { grid-template-columns: 1fr 1fr; } }
+        .photo-gallery figure { margin: 0; }
+        .photo-gallery img { width: 100%; height: 220px; object-fit: cover; border: 1px solid var(--border-color); }
+        .photo-placeholder { height: 220px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; text-align: center; color: #999; font-size: 0.85rem; padding: 1rem; background: var(--bg-grey); }
+        .photo-gallery figcaption { font-size: 0.8rem; color: #999; margin-top: 0.5rem; text-align: center; }
+
+        .team-credits { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+        .team-credits a { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid var(--border-color); padding: 0.6rem 1rem; border-radius: 4px; font-size: 0.9rem; font-weight: 500; color: var(--text-black); background: #fff; transition: all .3s ease; }
+        .team-credits a:hover { border-color: #f57c00; color: #f57c00; }
+        .team-credits a i { color: #0a66c2; }
+        .team-credits a:hover i { color: #f57c00; }
+    </style>
+</head>
+
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Srimathi Natarajan</h2>
+                <p>Business / Data Analyst</p>
+                <div class="logo-container">
+                    <img src="uconn_business_logo.png" alt="Uconn Business Logo" class="uconn-logo">
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html#hero" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#skills" class="nav-link">Skills</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="certifications.html" class="nav-link">Technical Certifications</a>
+                <a href="intern-workshop.html" class="nav-link">Intern/Workshop</a>
+                <a href="travelers-case-study.html" class="nav-link active">Competition</a>
+                <a href="Srimathi_Natarajan_Resume.pdf" target="_blank" class="nav-link"
+                    download="Srimathi_Natarajan_Resume">Resume / CV</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="social-links">
+                    <button class="social-btn" data-url="https://www.linkedin.com/in/srimathi-natarajan-424b54169">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </button>
+                    <button class="social-btn"
+                        data-url="https://mail.google.com/mail/?view=cm&fs=1&to=srimathi.natarajan23@gmail.com">
+                        <svg class="gmail-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M24 4.5v15c0 .85-.65 1.5-1.5 1.5H21V7.39l-9 6.58-9-6.58V21H1.5C.65 21 0 20.35 0 19.5v-15c0-1.17 1.32-1.88 2.26-1.19L12 10.61l9.74-7.3c.94-.69 2.26 0 2.26 1.19z" />
+                        </svg>
+                    </button>
+                    <button class="social-btn" data-url="tel:8607077606">
+                        <i class="fa-solid fa-phone"></i>
+                    </button>
+                </div>
+                <p>&copy; <span id="year">2026</span></p>
+            </div>
+        </aside>
+
+        <!-- Mobile Header Toggle -->
+        <div class="mobile-toggle-bar">
+            <div class="brand">Srimathi</div>
+            <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="section">
+                <div class="container">
+                    <header class="page-header">
+                        <a href="projects.html" class="back-link">
+                            <i class="fa-solid fa-arrow-left"></i> Back to Projects
+                        </a>
+                        <h1 class="section-title">Travelers BI&amp;A LDP Case Competition</h1>
+                        <p class="section-subtitle">Predicting commercial auto policy churn from real-world insurance
+                            data — a machine learning case study.</p>
+                    </header>
+
+                    <!-- Intro / reflection -->
+                    <div class="case-intro">
+                        <p class="lead">I represented Team 1 from UConn in the Travelers BI&amp;A LDP Case Competition,
+                            where we tackled a real-world policy churn prediction problem using actual insurance data.</p>
+                        <p>This one meant a lot to me. At one point I honestly wondered if I was ready for something at
+                            this level — but I chose to push through that fear, show up, and give it my best. Sometimes
+                            the opportunities we feel least ready for become the ones that help us grow the most. I walked
+                            away with more confidence, stronger analytical thinking, and even more excitement for the road
+                            ahead in data and business analytics.</p>
+                        <p>Huge thanks to Travelers for creating such a meaningful platform for students to work on a real
+                            business problem — and to my teammates for the collaboration, brainstorming, and teamwork
+                            throughout. This was truly a team effort.</p>
+                        <p class="context-line">2026 · Team 1, University of Connecticut School of Business</p>
+                    </div>
+
+                    <!-- Headline metrics -->
+                    <div class="stat-row">
+                        <div class="stat-tile">
+                            <div class="num">0.906</div>
+                            <div class="lbl">MODEL AUC</div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="num">94.4%</div>
+                            <div class="lbl">ACCURACY</div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="num">7,998</div>
+                            <div class="lbl">POLICIES ANALYZED</div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="num">12.7%</div>
+                            <div class="lbl">CHURN RATE</div>
+                        </div>
+                    </div>
+
+                    <!-- Overview card (matches your existing project-card style) -->
+                    <div class="projects-grid" style="margin-bottom: 3.5rem;">
+                        <div class="project-card-modern">
+                            <div class="project-header">
+                                <h3>Policy Churn Prediction</h3>
+                                <span class="project-badge">Business Analytics · Machine Learning</span>
+                            </div>
+                            <p class="project-date">2026 · Travelers × UConn School of Business</p>
+
+                            <div class="project-sections">
+                                <div class="project-section">
+                                    <h4>CHALLENGE</h4>
+                                    <p>Using real, messy commercial insurance data, identify which policies are likely to
+                                        churn — and explain what drives that churn — so the business can act early. The raw
+                                        data wasn't policy-level and had no reliable cancellation field to learn from.</p>
+                                </div>
+
+                                <div class="project-section">
+                                    <h4>SOLUTION</h4>
+                                    <p>Reshaped 335,994 raw rows into a clean, policy-level dataset, engineered a practical
+                                        churn definition and business features, then compared multiple machine learning
+                                        models and tuned the best one for stronger recall.</p>
+                                </div>
+
+                                <div class="project-section">
+                                    <h4>RESULTS</h4>
+                                    <p><strong>Gradient Boosting</strong> delivered the strongest performance (AUC 0.906,
+                                        94.4% accuracy). We showed churn is <strong>not random</strong> — it's strongly
+                                        linked to pricing, business maturity, vehicle profile, coverage complexity, and
+                                        geography.</p>
+                                </div>
+                            </div>
+
+                            <div class="project-tools">
+                                <h4>TOOLS</h4>
+                                <div class="tech-tags">
+                                    <span>Python</span>
+                                    <span>pandas</span>
+                                    <span>scikit-learn</span>
+                                    <span>Gradient Boosting</span>
+                                    <span>Google Colab</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Approach -->
+                    <div class="case-block">
+                        <h2>How we approached it</h2>
+                        <p class="block-sub">From raw records to a business-ready churn model, step by step.</p>
+
+                        <div class="step-grid">
+                            <div class="step">
+                                <h4>STEP 01 · DATA RESHAPING</h4>
+                                <h3>From records to policies</h3>
+                                <p>The raw file had 335,994 rows but only 7,998 unique policy numbers — one policy appeared
+                                    many times. We aggregated every row by <code>PolicyNumber</code> into a single row per
+                                    policy, preventing double counting and making the analysis business-meaningful.</p>
+                            </div>
+
+                            <div class="step">
+                                <h4>STEP 02 · DEFINING CHURN</h4>
+                                <h3>A practical churn proxy</h3>
+                                <p>The cancellation field wasn't usable (its <code>1800-01-01</code> placeholder just meant
+                                    "no date"), so we built our own definition: a policy churned when it ended earlier than
+                                    expected — <code>PolicyTermDate &lt; PolicyExpDate</code>. That gave us a workable
+                                    target: 1,015 churned vs 6,983 retained (~12.7%).</p>
+                            </div>
+
+                            <div class="step">
+                                <h4>STEP 03 · DATA QUALITY</h4>
+                                <h3>Handling missing data</h3>
+                                <p>We audited missingness before modeling:</p>
+                                <ul>
+                                    <li><strong>High:</strong> CoverageDeductible, BusinessUse, EstablishYear</li>
+                                    <li><strong>Moderate:</strong> VehicleType, VehicleValue, VehicleAge, BillingFrequency</li>
+                                </ul>
+                            </div>
+
+                            <div class="step">
+                                <h4>STEP 04 · FEATURE ENGINEERING</h4>
+                                <h3>Business-level features</h3>
+                                <p>We created features that reflect real business behavior:</p>
+                                <ul>
+                                    <li>Premium per vehicle</li>
+                                    <li>Business age at policy effective date</li>
+                                    <li>Unique vehicle count (from VINs)</li>
+                                    <li>Coverage complexity (unique coverage codes)</li>
+                                </ul>
+                            </div>
+
+                            <div class="step">
+                                <h4>STEP 05 · MODELING</h4>
+                                <h3>Comparing models</h3>
+                                <p>We tested Logistic Regression, Random Forest, and Gradient Boosting on the imbalanced
+                                    (12.7% churn) dataset. Gradient Boosting came out clearly ahead on overall performance.</p>
+                            </div>
+
+                            <div class="step">
+                                <h4>STEP 06 · THRESHOLD TUNING</h4>
+                                <h3>Catching more churners</h3>
+                                <p>The default 0.50 threshold was too conservative and missed churners. Lowering it to 0.45
+                                    lifted recall while keeping precision strong — a better trade-off for a business that
+                                    wants to catch at-risk policies early.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model results -->
+                    <div class="case-block">
+                        <h2>Model performance</h2>
+                        <p class="block-sub">Gradient Boosting was our best model, before and after threshold tuning.</p>
+
+                        <div class="model-table-wrap">
+                            <table class="model-table">
+                                <thead>
+                                    <tr>
+                                        <th>Gradient Boosting</th>
+                                        <th>AUC</th>
+                                        <th>Accuracy</th>
+                                        <th>Precision</th>
+                                        <th>Recall</th>
+                                        <th>F1</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Default (0.50 threshold)</td>
+                                        <td>0.906</td>
+                                        <td>0.944</td>
+                                        <td>0.905</td>
+                                        <td>0.626</td>
+                                        <td>&mdash;</td>
+                                    </tr>
+                                    <tr class="best">
+                                        <td>Tuned (0.45 threshold) &middot; best</td>
+                                        <td>0.906</td>
+                                        <td>0.944</td>
+                                        <td>0.877</td>
+                                        <td>0.652</td>
+                                        <td>0.748</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="table-note">Compared against Logistic Regression and Random Forest; Gradient Boosting had
+                            the best overall performance. Tuning traded a little precision for higher recall — better for
+                            flagging at-risk policies.</p>
+                    </div>
+
+                    <!-- Key drivers -->
+                    <div class="case-block">
+                        <h2>What drives churn</h2>
+                        <p class="block-sub">The strongest predictive signals from the model — churn is not random.</p>
+                        <div class="driver-tags">
+                            <span>Premium Amount</span>
+                            <span>Premium per Vehicle</span>
+                            <span>Business Maturity</span>
+                            <span>Vehicle Value</span>
+                            <span>Vehicle Age</span>
+                            <span>Coverage Complexity</span>
+                            <span>Vehicle Count</span>
+                            <span>Policy Limit</span>
+                            <span>Geography</span>
+                        </div>
+                    </div>
+
+                    <!-- Photos -->
+                    <div class="case-block">
+                        <h2>Competition moments</h2>
+                        <p class="block-sub">Photos from the competition.</p>
+                        <div class="photo-gallery">
+                            <figure>
+                                <img src="travelers_photo1.jpg" alt="Presenting segmentation analysis on stage at Travelers">
+                                <figcaption>Presenting Key Findings</figcaption>
+                            </figure>
+                            <figure>
+                                <img src="travelers_photo2.jpg" alt="Presenting data understanding at the Travelers podium">
+                                <figcaption>Data Understanding Presentation</figcaption>
+                            </figure>
+                            <figure>
+                                <img src="travelers_photo3.jpg" alt="Team 1 working together on the case study">
+                                <figcaption>Team 1 Collaboration &amp; Brainstorming</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <!-- Team -->
+                    <div class="case-block" style="margin-bottom: 1rem;">
+                        <h2>The team</h2>
+                        <p class="block-sub">Team 1 — UConn School of Business.</p>
+                        <div class="team-credits">
+                            <a href="https://www.linkedin.com/in/trishan-kundu-8a8a6b85/" target="_blank"
+                                rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> Trishan Kundu</a>
+                            <a href="https://www.linkedin.com/in/sabereen-faruque/" target="_blank"
+                                rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> Sabereen Faruque Safa</a>
+                            <a href="https://www.linkedin.com/in/truman-brodeur-1a2b0421b/" target="_blank"
+                                rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> Truman Brodeur</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
